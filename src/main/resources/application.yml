@@ -1,0 +1,52 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+#comment
+  tomcat:
+    max-wait: 20000
+    max-active: 50
+    max-idle: 20
+    min-idle: 15
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        id:
+          new_generator_mappings: false
+    show-sql: true
+    database: postgresql
+
+server:
+   port: 8080 # This is the default port anyway, but you can change it here
+
+security:
+  jwt:
+    token:
+      secret-key: ${MY_SECRET_KEY:default-value}
+      # todo zmienić
+      expire-length: 3000000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+      
+UserController:
+  signin: Authenticates user and returns its JWT token.
+  signup: Creates user and returns its JWT token
+  delete: Deletes specific user by username
+  search: Returns specific user by username
+  me: Returns current user's data
